@@ -31,12 +31,13 @@ public class MenusGamer {
 			switch (opcao) {
 			case 1:
 				crudGamer.pesquisarGamer();
+				menuPrincipalGamer();
 				break;
 			case 2:
 				menuLoja.menuLojaByGamer();
 				break;
 			case 3:
-				menuConfiguracoes();
+				validacoes.validaGamer();
 				break;
 			case 4:
 				menuPesquisa();
@@ -50,38 +51,34 @@ public class MenusGamer {
 	}
 
 	public static void menuConfiguracoes() {
-		validacoes.validaGamer();
 
-		if (validacoes.validaGamer() == true) {
-			System.out.print("[ 1 ] Trocar nome\n[ 2 ] Trocar email\n[ 3 ] Trocar senha\n[ 4 ] Voltar\n-- ");
-			opcao = read.nextInt();
-			read.nextLine();
+		System.out.print("[ 1 ] Trocar nome\n[ 2 ] Trocar email\n[ 3 ] Trocar senha\n[ 4 ] Voltar\n-- ");
+		opcao = read.nextInt();
+		read.nextLine();
 
-			do {
-				switch (opcao) {
-				case 1:
-					crudGamer.updateNome();
-					break;
-				case 2:
-					crudGamer.updateEmail();
-					break;
-				case 3:
-					crudGamer.updateSenha();
-					break;
-				case 4:
-					menuPrincipalGamer();
-					break;
-				default:
-					System.out.println("Opção inválida!\nTente novamente.");
-				}
-			} while (true);
-		} else {
-			System.out.println("Matrícula ou senha inválidos.");
-		}
+		do {
+			switch (opcao) {
+			case 1:
+				crudGamer.updateNome();
+				break;
+			case 2:
+				crudGamer.updateEmail();
+				break;
+			case 3:
+				crudGamer.updateSenha();
+				break;
+			case 4:
+				menuPrincipalGamer();
+				break;
+			default:
+				System.out.println("Opção inválida!\nTente novamente.");
+			}
+		} while (true);
+
 	}
 
 	public static void menuPesquisa() {
-		System.out.print("[ 1 ] Pesquisar Administrador\n[ 2 ] Pesquisar Gamer\n-- ");
+		System.out.print("[ 1 ] Pesquisar Administrador\n[ 2 ] Pesquisar Gamer\n[ 3 ] Voltar\n-- ");
 		opcao = read.nextInt();
 		read.nextLine();
 

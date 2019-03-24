@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import javax.management.openmbean.OpenMBeanConstructorInfoSupport;
+
 import Menus.MenusAdm;
 import Model.Gamer;
 import Model.Turma;
@@ -12,53 +14,46 @@ public class CRUDTurma {
 
 	public static Scanner read = new Scanner(System.in);
 
-	static Map<String, Turma> mapTurma = new HashMap<String, Turma>();
-	static Map<String, Gamer> newMapGamer = new HashMap<String, Gamer>();
+	public static Turma turma = new Turma();
+	public static Gamer gamer = new Gamer();
+	
+	public static MenusAdm menuAdm = new MenusAdm();
+	
+	public static Validacoes validaTurma = new Validacoes();
+	
+	public static CRUDGamer crudGamer = new CRUDGamer();
 
-	static Turma turma = new Turma();
-	static Gamer gamer = new Gamer();
-	static Validacoes validaTurma = new Validacoes();
-	static CRUDGamer crudGamer = new CRUDGamer();
+	public static Map<String, Turma> mapTurma = new HashMap<String, Turma>();
 
-	static MenusAdm menuAdm = new MenusAdm();
-
-	static String keyTurma;
-	static String pesquisaTurma;
-	static int opcaoTurma = 0;
+	public static String key;
+	public static String pesquisaTurma;
+	public static int opcaoTurma = 0;
 
 	public static Map<String, Turma> cadastroTurma() {
 		Turma turma = new Turma();
-
+		
 		System.out.println("- Cadastro Turma -");
-		System.out.print("Nome : ");
+		System.out.print("Nome da turma: ");
 		turma.setNome(read.nextLine());
-		System.out.print("Senha : ");
+		System.out.print("Senha: ");
 		turma.setSenha(read.nextLine());
-
-		validaTurma.validaNome(turma);
-		validaTurma.validaSenha(turma);
-
-		keyTurma = turma.getNome();
-		mapTurma.put(keyTurma, turma);
-
-		System.out.print("Deseja adicionar Gamer a sua turma agora?\n[ 1 ] Sim\n[ 2 ] Não\n-- ");
+		
+		key = turma.getNome();
+		mapTurma.put(key, turma);
+		
+		System.out.println("Deseja adicionar Gamer a sua turma agora?\n[ 1 ] Sim [ 2 ] Não\n- ");
 		opcaoTurma = read.nextInt();
 		read.nextLine();
-
-		if (opcaoTurma == 1) {
+		
+		if(opcaoTurma == 1) {
 			crudGamer.cadastroGamer();
-			newMapGamer.put(crudGamer.gamer.getMatricula(), gamer);
-
-			System.out.println(newMapGamer);
-
-			turma.setNewMapGamer(newMapGamer);
-
-		} else if (opcaoTurma == 2) {
+		} else if(opcaoTurma == 2){
 			menuAdm.menuTurma();
 		} else {
-			System.out.println("Opção inválida!");
+			System.out.println("Opção Inválida!");
 		}
 		return mapTurma;
+
 	}
 
 	public static void pesquisaTurma() {
@@ -76,7 +71,7 @@ public class CRUDTurma {
 	}
 
 	public static void listarAllTurma() {
-		mapTurma.forEach((keyTurma, turma) -> System.out.println("Turma : " + keyTurma + turma));
+		mapTurma.forEach((key, turma) -> System.out.println("Turma : " + key + turma));
 	}
 
 	public static void pesquisarTurma() {
@@ -84,7 +79,9 @@ public class CRUDTurma {
 		pesquisaTurma = read.nextLine();
 
 		if (mapTurma.containsKey(pesquisaTurma)) {
-			mapTurma.forEach((pesquisaTurma, turma) -> System.out.println("Turma: " + keyTurma + turma));
+			System.out.println(mapTurma.get(pesquisaTurma));
+		} else {
+			System.out.println("a turma procurada não está cadastrada.");
 		}
 
 	}
@@ -94,7 +91,7 @@ public class CRUDTurma {
 		pesquisaTurma = read.nextLine();
 
 		if (mapTurma.containsKey(pesquisaTurma)) {
-			mapTurma.forEach((pesquisaGamer, gamer) -> System.out.println("Turma : " + keyTurma + gamer));
+			mapTurma.forEach((pesquisaGamer, gamer) -> System.out.println("Turma : " + key + gamer));
 
 			System.out.print("\nInforme o novo nome da turma : ");
 			mapTurma.get(pesquisaTurma).setNome(read.nextLine());
@@ -109,7 +106,7 @@ public class CRUDTurma {
 		pesquisaTurma = read.nextLine();
 
 		if (mapTurma.containsKey(pesquisaTurma)) {
-			mapTurma.forEach((pesquisaGamer, gamer) -> System.out.println("Turma : " + keyTurma + gamer));
+			System.out.println(mapTurma.get(pesquisaTurma));
 
 			System.out.print("Nova senha: ");
 			String novaSenha = read.nextLine();
@@ -127,11 +124,11 @@ public class CRUDTurma {
 	}
 
 	public static void deleteTurma() {
-		System.out.println("Informe a turma : ");
+		System.out.print("Informe a turma : ");
 		pesquisaTurma = read.nextLine();
 
 		if (mapTurma.containsKey(pesquisaTurma)) {
-			mapTurma.forEach((pesquisaGamer, gamer) -> System.out.println("Turma : " + keyTurma + gamer));
+			System.out.println(mapTurma.get(pesquisaTurma));
 
 			mapTurma.remove(pesquisaTurma);
 

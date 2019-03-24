@@ -79,7 +79,7 @@ public class CRUDGamer {
 	}
 
 	public static void pesquisaGamer() {
-		System.out.print("[ 1 ] Listar todos\n[ 2 ] Pesquisar Gamer específico\n-- ");
+		System.out.print("[ 1 ] Listar todos\n[ 2 ] Pesquisar Gamer específico\n[ 3 ] Voltar\n-- ");
 		opcaoGamer = read.nextInt();
 		read.nextLine();
 
@@ -87,6 +87,24 @@ public class CRUDGamer {
 			listarAllGamer();
 		} else if (opcaoGamer == 2) {
 			pesquisarGamer();
+		} else if (opcaoGamer == 3) {
+			menuGamer.menuPesquisa();
+		} else {
+			System.out.println("Opção inválida.");
+		}
+	}
+
+	public static void pesquisaGamer(Gamer gamer) {
+		System.out.print("[ 1 ] Listar todos\n[ 2 ] Pesquisar Gamer específico\n[ 3 ] Voltar\n-- ");
+		opcaoGamer = read.nextInt();
+		read.nextLine();
+
+		if (opcaoGamer == 1) {
+			listarAllGamer();
+		} else if (opcaoGamer == 2) {
+			pesquisarGamer();
+		} else if (opcaoGamer == 3) {
+			menuAdm.menuPesquisa();
 		} else {
 			System.out.println("Opção inválida.");
 		}
@@ -102,7 +120,7 @@ public class CRUDGamer {
 		pesquisaGamer = read.nextLine();
 
 		if (mapGamer.containsKey(pesquisaGamer)) {
-			mapGamer.forEach((pesquisaGamer, gamer) -> System.out.println("Matrícula : " + key + gamer));
+			System.out.println(mapGamer.get(pesquisaGamer));
 		} else {
 			System.out.println("O gamer pesquisado não existe.");
 		}
@@ -114,10 +132,12 @@ public class CRUDGamer {
 		pesquisaGamer = read.nextLine();
 
 		if (mapGamer.containsKey(pesquisaGamer)) {
-			mapGamer.forEach((pesquisaGamer, gamer) -> System.out.println("Matrícula : " + key + gamer));
+			System.out.println(mapGamer.get(pesquisaGamer));
 
 			System.out.print("\nInforme o novo nome  : ");
 			mapGamer.get(pesquisaGamer).setNome(read.nextLine());
+
+			menuGamer.menuConfiguracoes();
 		} else {
 			System.out.println("A matrícula informada não existe.");
 		}
@@ -129,10 +149,12 @@ public class CRUDGamer {
 		pesquisaGamer = read.nextLine();
 
 		if (mapGamer.containsKey(pesquisaGamer)) {
-			mapGamer.forEach((pesquisaGamer, gamer) -> System.out.println("Matrícula : " + key + gamer));
+			System.out.println(mapGamer.get(pesquisaGamer));
 
 			System.out.print("\nInforme o novo email  : ");
 			mapGamer.get(pesquisaGamer).setEmail(read.nextLine());
+
+			menuGamer.menuConfiguracoes();
 		} else {
 			System.out.println("A matrícula informada não existe.");
 		}
@@ -143,10 +165,12 @@ public class CRUDGamer {
 		pesquisaGamer = read.nextLine();
 
 		if (mapGamer.containsKey(pesquisaGamer)) {
-			mapGamer.forEach((pesquisaGamer, gamer) -> System.out.println("Matrícula : " + key + gamer));
+			System.out.println(mapGamer.get(pesquisaGamer));
 
 			System.out.print("\nInforme sua nova senha  : ");
 			mapGamer.get(pesquisaGamer).setSenha(read.nextLine());
+
+			menuGamer.menuConfiguracoes();
 		} else {
 			System.out.println("A matrícula informada não existe.");
 		}
@@ -278,7 +302,7 @@ public class CRUDGamer {
 		System.out.println("- Login Gamer -");
 		System.out.print("Matrícula : ");
 		String loginGamer = read.nextLine();
-		System.out.println("Senha : ");
+		System.out.print("Senha : ");
 		String senhaGamer = read.nextLine();
 
 		if (mapGamer.containsKey(loginGamer)) {

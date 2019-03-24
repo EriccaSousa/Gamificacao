@@ -53,7 +53,7 @@ public class Gamer extends Usuario {
 	@Override
 	public String toString() {
 		return "\nNome : " + this.getNome() + "\nEmail : " + this.getEmail() + "\nTurma : " + this.turma
-				+ "\nCristais : " + this.cristais + "\nDiamantes : " + this.diamantes;
+				+ "\nCristais : " + this.cristais + "\nDiamantes : " + this.diamantes + "\n";
 	}
 
 }

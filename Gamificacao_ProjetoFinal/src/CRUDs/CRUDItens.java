@@ -8,51 +8,33 @@ import Model.Itens;
 
 public class CRUDItens {
 	public static Scanner read = new Scanner(System.in);
+	
+	static Itens item = new Itens();
+	static Validacoes validaItem = new Validacoes();
 
 	static Map<String, Itens> mapItens = new HashMap<String, Itens>();
-	static Itens newItem = new Itens();
 
 	static int opcaoItem = 0;
 	static String pesquisaItens;
 
 	public static void cadastroProdutos() {
+		Itens item = new Itens();
+		
 		System.out.print("\nCADASTRO DE ITENS\nNome do produto: ");
-		newItem.setNome(read.nextLine());
+		item.setNome(read.nextLine());
 		System.out.print("Preço em Cristais: ");
-		newItem.setValCristais(read.nextInt());
+		item.setValCristais(read.nextInt());
 		read.nextLine();
 		System.out.print("Preço em Diamantes: ");
-		newItem.setValDiamantes(read.nextInt());
+		item.setValDiamantes(read.nextInt());
 		read.nextLine();
 
-		validaCadastroProdutos(newItem);
+		validaItem.validaCadastroProdutos(item);
 
-		String key = newItem.getNome();
-		mapItens.put(key, newItem);
+		String key = item.getNome();
+		mapItens.put(key, item);
 	}
-
-	public static void validaCadastroProdutos(Itens newItem) {
-		if (mapItens.containsKey(newItem.getNome())) {
-			System.out.println("Produto já cadastrado.");
-			cadastroProdutos();
-		}
-		if (newItem.getNome().equals("")) {
-			System.out.print("O campo destinado ao NOME não pode ficar vazio.\nNome: ");
-			newItem.setNome(read.nextLine());
-		}
-		if (newItem.getValCristais() < 0) {
-			System.out.print("O campo destinado ao PREÇO EM CRISTAIS não pode ficar vazio.\nPreço em Cristais: ");
-			newItem.setValCristais(read.nextInt());
-			read.nextLine();
-		}
-		if (newItem.getValDiamantes() < 0) {
-			System.out.println("O campo destinado ao PREÇO EM DIAMANTES não pode ficar vazio.\nPreço em Diamantes");
-			newItem.setValDiamantes(read.nextInt());
-			read.nextLine();
-		}
-
-	}
-
+	
 	public static void pesquisaItens() {
 		System.out.println("- Pesquisar Itens -");
 		System.out.print("[ 1 ] Listar todos\n[ 2 ] Pesquisar Iten específico\n-- ");
@@ -82,16 +64,7 @@ public class CRUDItens {
 			System.out.println("Item procurado não existe na loja.");
 		}
 	}
-
-	public static void uptNomeItem() {
-		listarItemEspecifico();
-
-		System.out.print("Novo nome: ");
-		mapItens.get(pesquisaItens).setNome(read.nextLine());
-
-		System.out.println(mapItens.get(pesquisaItens));
-	}
-
+	
 	public static void uptPrecoItem() {
 		System.out.print("\n[ 1 ] Atualizar Cristais\n[ 2 ] Atualixar Diamantesr\n\n- ");
 		opcaoItem = read.nextInt();

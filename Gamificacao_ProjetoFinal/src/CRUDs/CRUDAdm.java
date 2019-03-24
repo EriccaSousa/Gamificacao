@@ -73,7 +73,7 @@ public class CRUDAdm {
 		pesquisaAdm = read.nextLine();
 
 		if (mapAdm.containsKey(pesquisaAdm)) {
-			mapAdm.forEach((pesquisaAdm, adm) -> System.out.println("Login : " + key + adm));
+			System.out.println(mapAdm.get(pesquisaAdm));
 		} else {
 			System.out.println("O Administrador pesquisado não existe.");
 		}
@@ -84,10 +84,12 @@ public class CRUDAdm {
 		pesquisaAdm = read.nextLine();
 
 		if (mapAdm.containsKey(pesquisaAdm)) {
-			mapAdm.forEach((pesquisaAdm, adm) -> System.out.println("Login : " + key + adm));
+			System.out.println(mapAdm.get(pesquisaAdm));
 
 			System.out.print("\nInforme o novo nome  : ");
 			mapAdm.get(pesquisaAdm).setNome(read.nextLine());
+
+			menusAdm.menuConfiguracoesAdm();
 		} else {
 			System.out.println("O Login informado não existe.");
 		}
@@ -99,10 +101,12 @@ public class CRUDAdm {
 		pesquisaAdm = read.nextLine();
 
 		if (mapAdm.containsKey(pesquisaAdm)) {
-			mapAdm.forEach((pesquisaAdm, adm) -> System.out.println("Login: " + key + adm));
+			System.out.println(mapAdm.get(pesquisaAdm));
 
 			System.out.print("\nInforme o novo email  : ");
 			mapAdm.get(pesquisaAdm).setEmail(read.nextLine());
+
+			menusAdm.menuConfiguracoesAdm();
 		} else {
 			System.out.println("O Login informado não existe.");
 		}
@@ -113,10 +117,12 @@ public class CRUDAdm {
 		pesquisaAdm = read.nextLine();
 
 		if (mapAdm.containsKey(pesquisaAdm)) {
-			mapAdm.forEach((pesquisaAdm, adm) -> System.out.println("Login : " + key + adm));
+			System.out.println(mapAdm.get(pesquisaAdm));
 
 			System.out.print("\nInforme sua nova senha  : ");
 			mapAdm.get(pesquisaAdm).setSenha(read.nextLine());
+
+			menusAdm.menuConfiguracoesAdm();
 		} else {
 			System.out.println("O Login informada não existe.");
 		}
@@ -126,7 +132,7 @@ public class CRUDAdm {
 		System.out.println("Informe seu Login : ");
 
 		if (mapAdm.containsKey(pesquisaAdm)) {
-			mapAdm.forEach((pesquisaAdm, adm) -> System.out.println("Login : " + key + adm));
+			System.out.println(mapAdm.get(pesquisaAdm));
 
 			mapAdm.remove(pesquisaAdm);
 

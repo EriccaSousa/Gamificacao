@@ -6,11 +6,13 @@ import CRUDs.CRUDAdm;
 import CRUDs.CRUDGamer;
 import CRUDs.CRUDTurma;
 import CRUDs.Validacoes;
+import Model.Gamer;
 
 public class MenusAdm {
 
 	public static Scanner read = new Scanner(System.in);
 
+	static Gamer gamer = new Gamer();
 	static CRUDAdm crudAdm = new CRUDAdm();
 	static CRUDGamer crudGamer = new CRUDGamer();
 	static CRUDTurma crudTurma = new CRUDTurma();
@@ -42,7 +44,7 @@ public class MenusAdm {
 				menuLoja.menuLojaByAdm();
 				break;
 			case 4:
-				menuConfiguracoesAdm();
+				validacoes.validaAdm();
 				break;
 			case 5:
 				menuPesquisa();
@@ -84,39 +86,38 @@ public class MenusAdm {
 	}
 
 	public static void menuConfiguracoesAdm() {
-		validacoes.validaAdm();
-		if (validacoes.validaAdm() == true) {
-			System.out.println("- Configurações -");
-			System.out.println(
-					"[ 1 ] Trocar nome\n[ 2 ] Trocar email\n[ 3 ] Trocar Senha\n[ 4 ] Deletar conta\n[ 5 ] Voltar\n-- ");
+		System.out.println("- Configurações -");
+		System.out.println(
+				"[ 1 ] Trocar nome\n[ 2 ] Trocar email\n[ 3 ] Trocar Senha\n[ 4 ] Deletar conta\n[ 5 ] Voltar\n-- ");
+		opcao = read.nextInt();
+		read.nextLine();
 
-			do {
-				switch (opcao) {
-				case 1:
-					crudAdm.updateNome();
-					break;
-				case 2:
-					crudAdm.updateEmail();
-					break;
-				case 3:
-					crudAdm.updateSenha();
-					break;
-				case 4:
-					crudAdm.deleteAdm();
-					break;
-				case 5:
-					menuPrincipalAdm();
-					break;
-				default:
-					System.out.println("Opção inválida!\nTente novamente.");
-				}
-			} while (true);
-		} else {
-			System.out.println("Login ou senha inválido.");
-		}
+		do {
+			switch (opcao) {
+			case 1:
+				crudAdm.updateNome();
+				break;
+			case 2:
+				crudAdm.updateEmail();
+				break;
+			case 3:
+				crudAdm.updateSenha();
+				break;
+			case 4:
+				crudAdm.deleteAdm();
+				break;
+			case 5:
+				menuPrincipalAdm();
+				break;
+			default:
+				System.out.println("Opção inválida!\nTente novamente.");
+			}
+		} while (true);
+
 	}
 
 	public static void menuPesquisa() {
+		System.out.println("- Menu Pesquisa -");
 		System.out.print("[ 1 ] Pesquisar Administrador\n[ 2 ] Pesquisar Gamer\n[ 3 ] Voltar\n-- ");
 		opcao = read.nextInt();
 		read.nextLine();
@@ -128,7 +129,7 @@ public class MenusAdm {
 				menuPesquisa();
 				break;
 			case 2:
-				crudGamer.pesquisaGamer();
+				crudGamer.pesquisaGamer(gamer);
 				menuPesquisa();
 				break;
 			case 3:
@@ -158,7 +159,7 @@ public class MenusAdm {
 				menuTurma();
 				break;
 			case 3:
-				// AddGamer;
+				/// AddGamer();
 				break;
 			case 4:
 				crudTurma.deleteTurma();

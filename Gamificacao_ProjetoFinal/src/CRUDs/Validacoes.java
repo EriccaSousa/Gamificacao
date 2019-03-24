@@ -2,8 +2,11 @@ package CRUDs;
 
 import java.util.Scanner;
 
+import Menus.MenusAdm;
+import Menus.MenusGamer;
 import Model.Administrador;
 import Model.Gamer;
+import Model.Itens;
 import Model.Turma;
 
 public class Validacoes {
@@ -13,6 +16,10 @@ public class Validacoes {
 	static CRUDGamer crudGamer = new CRUDGamer();
 	static CRUDAdm crudAdm = new CRUDAdm();
 	static CRUDTurma crudTurma = new CRUDTurma();
+	static CRUDItens crudItens = new CRUDItens();
+
+	static MenusAdm menuAdm = new MenusAdm();
+	static MenusGamer menuGamer = new MenusGamer();
 
 	public static void validaNome(Gamer gamer) {
 		if (gamer.getNome() == "") {
@@ -176,27 +183,50 @@ public class Validacoes {
 
 		if (crudGamer.mapGamer.containsKey(matricula)) {
 			if (crudGamer.mapGamer.get(matricula).getSenha().equals(senha)) {
-				return true;
+				menuGamer.menuConfiguracoes();
 			} else {
-				return false;
+				System.out.println("Login ou Senha inválido!");
 			}
 		}
 		return false;
 	}
 
 	public static boolean validaAdm() {
-		System.out.println("Informe seu Login : ");
+		System.out.print("Informe seu Login : ");
 		String login = read.nextLine();
-		System.out.println("Informe sua senha : ");
+		System.out.print("Informe sua senha : ");
 		String senha = read.nextLine();
 
 		if (crudAdm.mapAdm.containsKey(login)) {
 			if (crudAdm.mapAdm.get(login).getSenha().equals(senha)) {
-				return true;
+				menuAdm.menuConfiguracoesAdm();
 			} else {
-				return false;
+				System.out.println("Login ou Senha inválido.");
 			}
 		}
 		return false;
 	}
+
+	public static void validaCadastroProdutos(Itens newItem) {
+		if (crudItens.mapItens.containsKey(newItem.getNome())) {
+			System.out.println("Produto já cadastrado.");
+			crudItens.cadastroProdutos();
+		}
+		if (newItem.getNome().equals("")) {
+			System.out.print("O campo destinado ao NOME não pode ficar vazio.\nNome: ");
+			newItem.setNome(read.nextLine());
+		}
+		if (newItem.getValCristais() < 0) {
+			System.out.print("O campo destinado ao PREÇO EM CRISTAIS não pode ficar vazio.\nPreço em Cristais: ");
+			newItem.setValCristais(read.nextInt());
+			read.nextLine();
+		}
+		if (newItem.getValDiamantes() < 0) {
+			System.out.println("O campo destinado ao PREÇO EM DIAMANTES não pode ficar vazio.\nPreço em Diamantes");
+			newItem.setValDiamantes(read.nextInt());
+			read.nextLine();
+		}
+
+	}
+
 }

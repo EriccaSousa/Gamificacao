@@ -19,7 +19,7 @@ public class MenusLoja {
 	public static void menuLojaByAdm() {
 		do {
 			System.out.print(
-					"\nMENU LOJA\n[ 1 ] Cadastrar Itens\n[ 2 ] Pesquisar Itens\n[ 4 ] Atualizar Informações\n[ 5 ] Deletar itens da loja\n[ 6 ] Voltar\n\n- ");
+					"\nMENU LOJA\n[ 1 ] Cadastrar Itens\n[ 2 ] Pesquisar Itens\n[ 4 ] Atualizar Preço\n[ 5 ] Deletar itens da loja\n[ 6 ] Voltar\n\n- ");
 			opcao = read.nextInt();
 			read.nextLine();
 
@@ -33,35 +33,13 @@ public class MenusLoja {
 				menuLojaByAdm();
 				break;
 			case 4:
-				atualizarItens();
+				crudItens.uptPrecoItem();
 				break;
 			case 5:
 				crudItens.deletarItem();
 				break;
 			case 6:
 				menuAdm.menuPrincipalAdm();
-				break;
-			default:
-				System.out.println("Opção inválida!\nTente novamente.");
-			}
-		} while (true);
-	}
-
-	public static void atualizarItens() {
-		do {
-			System.out.println("\nATUALIZAR ITENS\n[ 1 ] Atualizar nome\n[ 2 ] Atualizar preço\n[ 3 ] Voltar\n\n- ");
-			opcao = read.nextInt();
-			read.nextLine();
-
-			switch (opcao) {
-			case 1:
-				crudItens.uptNomeItem();
-				break;
-			case 2:
-				crudItens.uptPrecoItem();
-				break;
-			case 3:
-				menuLojaByAdm();
 				break;
 			default:
 				System.out.println("Opção inválida!\nTente novamente.");
