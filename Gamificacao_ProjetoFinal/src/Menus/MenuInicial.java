@@ -20,7 +20,7 @@ public class MenuInicial {
 	}
 
 	public static void menuInicial() {
-		System.out.print("[ 1 ] Cadastre-se como Admnistrador\n[ 2 ] Login\n[ 3 ] Sair\n-- ");
+		System.out.print("Bem vindo!\n[ 1 ] Cadastre-se como Admnistrador\n[ 2 ] Login\n[ 3 ] Sair\n-- ");
 		opcao = read.nextInt();
 		read.nextLine();
 
