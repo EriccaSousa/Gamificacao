@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import DAO.AdministradorDAO;
 import Menus.MenuInicial;
 import Menus.MenusAdm;
 import Model.Administrador;
@@ -23,7 +24,7 @@ public class CRUDAdm {
 	static String pesquisaAdm;
 	static int opcaoAdm = 0;
 
-	public static Map<String, Administrador> cadastroAdm() {
+	public static void cadastroAdm() {
 		Administrador adm = new Administrador();
 
 		System.out.println("- Cadastro Administrador - ");
@@ -34,19 +35,24 @@ public class CRUDAdm {
 		System.out.print("Login : ");
 		adm.setLogin(read.nextLine());
 		System.out.print("Senha : ");
-		adm.setSenha(read.nextLine());
+		String senha = read.nextLine();
+		adm.setSenha(validaAdm.criptografarSenhas(senha));
 
 		validaAdm.validaNome(adm);
 		validaAdm.validaEmail(adm);
 		validaAdm.validaLogin(adm);
 		validaAdm.validaSenha(adm);
 
-		key = adm.getLogin();
-		mapAdm.put(key, adm);
+		try {
+			if (AdministradorDAO.createADM(adm)) {
+				System.out.println("Cadastro realizado com sucesso!\n");
+			}
+		} catch (Exception e) {
+			System.out.println("Erro ao cadastrar!\nPor favor, tente novamente.\n");
+		}
 
 		menusAdm.menuPrincipalAdm();
 
-		return mapAdm;
 	}
 
 	public static void pesquisaAdm() {

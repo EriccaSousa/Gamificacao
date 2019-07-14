@@ -1,5 +1,8 @@
 package CRUDs;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
 import Menus.MenusAdm;
@@ -157,15 +160,6 @@ public class Validacoes {
 		}
 	}
 
-	public static void validaTurma(Gamer gamer) {
-		if (gamer.getTurma() == "") {
-			System.out.println("O campo referente a turma não pode ficar vazio.");
-
-			System.out.print("Turma : ");
-			gamer.setTurma(read.nextLine());
-		}
-	}
-
 	public static void validaLogin(Administrador adm) {
 		if (crudAdm.mapAdm.containsKey(adm.getLogin())) {
 			System.out.println("O login informado ja existe.");
@@ -227,6 +221,38 @@ public class Validacoes {
 			read.nextLine();
 		}
 
+	}
+
+	public static String criptografarSenhas(String senha) {
+		int contador, tamanho, codigoASCII;
+		String senhaCriptografada = "";
+		tamanho = senha.length();
+		senha = senha.toUpperCase();
+		contador = 0;
+
+		while (contador < tamanho) {
+			codigoASCII = senha.charAt(contador) + 130;
+			senhaCriptografada = senhaCriptografada + (char) codigoASCII;
+			contador++;
+		}
+
+		return senhaCriptografada;
+	}
+
+	public static String DecriptoGrafarSenhas(String senha) {
+		int contador, tamanho, codigoASCII;
+		String senhaCriptografada = "";
+		tamanho = senha.length();
+		senha = senha.toUpperCase();
+		contador = 0;
+
+		while (contador < tamanho) {
+			codigoASCII = senha.charAt(contador) - 130;
+			senhaCriptografada = senhaCriptografada + (char) codigoASCII;
+			contador++;
+		}
+
+		return senhaCriptografada;
 	}
 
 }

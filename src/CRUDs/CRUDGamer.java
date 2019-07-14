@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import DAO.GamerDAO;
 import Menus.MenusAdm;
 import Menus.MenusGamer;
 import Menus.MenusLoja;
@@ -38,7 +39,7 @@ public class CRUDGamer {
 	static String pesquisaGamer;
 	static int opcaoGamer = 0;
 
-	public static Map<String, Gamer> cadastroGamer() {
+	public static void cadastroGamer() {
 		Gamer gamer = new Gamer();
 
 		System.out.println("- Cadastro Gamer -");
@@ -47,11 +48,12 @@ public class CRUDGamer {
 		System.out.print("Email : ");
 		gamer.setEmail(read.nextLine());
 		System.out.print("Senha : ");
-		gamer.setSenha(read.nextLine());
+		String senha = read.nextLine();
+		gamer.setSenha(validaGamer.criptografarSenhas(senha));
 		System.out.print("Matrícula : ");
 		gamer.setMatricula(read.nextLine());
-		System.out.print("Turma : ");
-		gamer.setTurma(read.nextLine());
+		
+		gamer.setPontuacao(0);
 		gamer.setCristais(0);
 		gamer.setDiamantes(0);
 
@@ -59,23 +61,16 @@ public class CRUDGamer {
 		validaGamer.validaEmail(gamer);
 		validaGamer.validaSenha(gamer);
 		validaGamer.validaMatricula(gamer);
-		validaGamer.validaTurma(gamer);
 
-		key = gamer.getMatricula();
-		mapGamer.put(key, gamer);
-
-		System.out.print("Cadastrar outro Gamer?\n[ 1 ] Sim\n[ 2 ] Não\n-- ");
-		opcaoGamer = read.nextInt();
-		read.nextLine();
-
-		if (opcaoGamer == 1) {
-			cadastroGamer();
-		} else if (opcaoGamer == 2) {
-			menuAdm.menuTurma();
-		} else {
-			System.out.println("Opção inválida!");
+		try {
+			if (GamerDAO.createGamer(gamer)) {
+				System.out.println("Cadastro realizado com sucesso!\n");
+			}
+		} catch (Exception e) {
+			System.out.println("Erro ao cadastrar!\nPor favor, tente novamente.\n");
 		}
-		return mapGamer;
+
+		menuGamer.menuPrincipalGamer();
 	}
 
 	public static void pesquisaGamer() {

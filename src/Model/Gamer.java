@@ -2,20 +2,21 @@ package Model;
 
 public class Gamer extends Usuario {
 	private String matricula;
-	private String turma;
 	private int diamantes;
 	private int cristais;
+	private double pontuacao;
 
 	public Gamer() {
 
 	}
 
-	public Gamer(String nome, String senha, String email, String matricula, String turma, int diamantes, int cristais) {
+	public Gamer(String nome, String senha, String email, String matricula, int diamantes, int cristais,
+			double pontuacao) {
 		super(nome, senha, email);
 		this.matricula = matricula;
-		this.turma = turma;
 		this.diamantes = diamantes;
 		this.cristais = cristais;
+		this.pontuacao = pontuacao;
 	}
 
 	public String getMatricula() {
@@ -24,14 +25,6 @@ public class Gamer extends Usuario {
 
 	public void setMatricula(String matricula) {
 		this.matricula = matricula;
-	}
-
-	public String getTurma() {
-		return turma;
-	}
-
-	public void setTurma(String turma) {
-		this.turma = turma;
 	}
 
 	public int getDiamantes() {
@@ -50,10 +43,12 @@ public class Gamer extends Usuario {
 		this.cristais = cristais;
 	}
 
-	@Override
-	public String toString() {
-		return "\nNome : " + this.getNome() + "\nEmail : " + this.getEmail() + "\nTurma : " + this.turma
-				+ "\nCristais : " + this.cristais + "\nDiamantes : " + this.diamantes + "\n";
+	public double getPontuacao() {
+		return pontuacao;
+	}
+
+	public void setPontuacao(double pontuacao) {
+		this.pontuacao = pontuacao;
 	}
 
 }

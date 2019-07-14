@@ -20,7 +20,8 @@ public class MenuInicial {
 	}
 
 	public static void menuInicial() {
-		System.out.print("Bem vindo!\n[ 1 ] Cadastre-se como Admnistrador\n[ 2 ] Login\n[ 3 ] Sair\n-- ");
+		System.out.print(
+				"Bem vindo!\n[ 1 ] Cadastre-se como Admnistrador\n[ 2 ] Cadastre-se como Gamer\n[ 3 ] Login\n[ 4 ] Sair\n-- ");
 		opcao = read.nextInt();
 		read.nextLine();
 
@@ -30,9 +31,11 @@ public class MenuInicial {
 				crudAdm.cadastroAdm();
 				break;
 			case 2:
+				crudGamer.cadastroGamer();
+			case 3:
 				menuLogin();
 				break;
-			case 3:
+			case 4:
 				System.exit(0);
 			default:
 				System.out.println("Opção inválida!\nTente novamente.");

@@ -21,9 +21,4 @@ public class Administrador extends Usuario {
 		this.login = login;
 	}
 
-	@Override
-	public String toString() {
-		return "\nAdministrador\nLogin : " + this.login + "\nNome: " + this.getNome() + "\nEmail: " + this.getEmail();
-	}
-
 }
